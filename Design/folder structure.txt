@@ -1,0 +1,53 @@
+aimers/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── styles/
+│   │   └── App.jsx	
+│   └── package.json
+
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── routes/
+│   │   ├── models/
+│   │   ├── middleware/
+│   │   ├── config/
+│   │   └── index.js
+│   └── package.json
+
+├── ml-services/
+│   ├── resume-scorer/
+│   │   ├── model/
+│   │   ├── app.py
+│   │   └── requirements.txt
+│   ├── job-recommender/
+│   ├── interview-nlp/
+
+├── database/
+│   ├── cassandra/
+│   ├── postgresql/
+│   └── mongodb/
+
+├── devops/
+│   ├── Docker/
+│   │   ├── frontend.Dockerfile
+│   │   ├── backend.Dockerfile
+│   │   └── ml.Dockerfile
+│   ├── docker-compose.yml
+│   ├── github-actions/
+│   └── nginx/
+
+├── tests/
+│   ├── frontend/
+│   ├── backend/
+│   └── ml-services/
+
+├── .env
+├── .gitignore
+└── README.md
