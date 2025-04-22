@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import '../assets/css/nav.css';
+import Nav from '../components/nav'; // Import Nav component from the correct path
 
-const Home = () => {
+const Header = () => {
+  useEffect(() => {
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-menu');
+
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+      });
+    }
+
+    // Optional cleanup if needed
+    return () => {
+      if (toggle && menu) {
+        toggle.removeEventListener('click', () => {
+          menu.classList.toggle('active');
+        });
+      }
+    };
+  }, []);
+
   return (
-    <div>
-      <h1>Welcome to Aimers</h1>
-      <p>This is your homepage.</p>
-    </div>
+    <header>
+      <Nav />  {/* Use the Nav component here */}
+    </header>
   );
 };
 
-export default Home;
+export default Header;
