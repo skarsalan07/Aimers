@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../assets/css/nav.css';
+
 import Nav from '../components/nav'; // Import Nav component from the correct path
 
 const Header = () => {
