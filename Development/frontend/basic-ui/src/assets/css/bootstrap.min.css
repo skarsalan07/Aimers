@@ -9572,7 +9572,6 @@ fieldset:disabled .btn {
 
 .bg-body-tertiary {
     --bs-bg-opacity: 1;
-    background-color: red !important
 }
 
 .bg-body-emphasis {
@@ -13621,4 +13620,4 @@ fieldset:disabled .btn {
     }
 }
 
-/*# sourceMappingURL=bootstrap.min.css.map */
+ /* sourceMappingURL=bootstrap.min.css.map */
