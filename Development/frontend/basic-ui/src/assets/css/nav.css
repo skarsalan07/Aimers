@@ -599,3 +599,35 @@ body {
         padding: 3rem 1rem;
     }
 }
+
+/* signup and login css */
+
+.login_button, .register_button {
+    cursor: pointer;
+    border: 0;
+    border-radius: 0.25rem; /* 4px */
+    font-weight: 600;
+    margin: 0 0.625rem;
+    width: 4.375rem; /* 70px */
+    height: 2.1rem; /* 70px */
+    box-shadow: 0 0 1.25rem rgba(104, 85, 224, 0.2); /* 20px */
+    transition: 0.4s;
+}
+
+.reg {
+    color: white;
+    background-color: rgba(104, 85, 224, 1);
+}
+
+.log {
+    color: rgb(104, 85, 224);
+    background-color: rgba(255, 255, 255, 1);
+    border: 0.0625rem solid rgba(104, 85, 224, 1); /* 1px */
+}
+
+.login_button:hover {
+    color: white;
+    /* width:; */
+    box-shadow: 0 0 1.25rem rgba(104, 85, 224, 0.6); /* 20px */
+    background-color: rgba(104, 85, 224, 1);
+}
