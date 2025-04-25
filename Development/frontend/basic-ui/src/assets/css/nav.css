@@ -37,7 +37,7 @@ body {
 
 /* Header and Navbar */
 .header {
-    position: fixed;
+    position: static;
     top: 0;
     left: 0;
     width: 100%;
@@ -59,7 +59,7 @@ body {
 
 /* Logo */
 .logo {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--primary-color);
     text-decoration: none;
@@ -553,6 +553,7 @@ body {
     .search-input, 
     .search-input:focus {
         width: 100%;
+        margin-top: 1rem;
     }
 
     .search-input {

@@ -526,7 +526,9 @@ button {
 [type=reset]:not(:disabled),
 [type=submit]:not(:disabled),
 button:not(:disabled) {
-    cursor: pointer
+    cursor: pointer;
+    margin-bottom: 0.3rem;
+    margin-top: 1   rem;
 }
 
 ::-moz-focus-inner {
@@ -4475,15 +4477,7 @@ fieldset:disabled .btn {
     justify-content: space-between
 }
 
-.navbar-brand {
-    padding-top: var(--bs-navbar-brand-padding-y);
-    padding-bottom: var(--bs-navbar-brand-padding-y);
-    margin-right: var(--bs-navbar-brand-margin-end);
-    font-size: var(--bs-navbar-brand-font-size);
-    color: var(--bs-navbar-brand-color);
-    text-decoration: none;
-    white-space: nowrap
-}
+
 
 .navbar-brand:focus,
 .navbar-brand:hover {
@@ -4504,10 +4498,10 @@ fieldset:disabled .btn {
     list-style: none
 }
 
-.navbar-nav .nav-link.active,
+/* .navbar-nav .nav-link.active,
 .navbar-nav .show>.nav-link {
     color: var(--bs-navbar-active-color)
-}
+} */
 
 .navbar-nav .dropdown-menu {
     position: static
