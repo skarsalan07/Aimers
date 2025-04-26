@@ -235,6 +235,8 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
+    text-align: end;
+    padding-left: 2rem;
 }
 
 .search-container {
