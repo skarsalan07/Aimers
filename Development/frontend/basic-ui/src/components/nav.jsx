@@ -97,40 +97,6 @@ function Nav_1() {
           </Container>
         </Navbar>
       </header>
-
-      <main>
-        <div className="content">
-          <div className="hero">
-            <h1>Modern Navigation Bar</h1>
-            <p>A futuristic and responsive navigation bar with smooth animations</p>
-            <button className="cta-button">Learn More</button>
-          </div>
-
-
-
-          <div className="section">
-            <h2>Features</h2>
-            <div className="features">
-              <div className="feature">
-                <h3>Responsive Design</h3>
-                <p>Works perfectly on desktop, tablet, and mobile devices</p>
-              </div>
-              <div className="feature">
-                <h3>Animated Dropdowns</h3>
-                <p>Smooth dropdown animations for desktop and mobile</p>
-              </div>
-              <div className="feature">
-                <h3>Dark/Light Theme</h3>
-                <p>Toggle between dark and light mode with ease</p>
-              </div>
-              <div className="feature">
-                <h3>Futuristic Look</h3>
-                <p>Modern glassmorphism and neon effects</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
     </>
   );
 }
