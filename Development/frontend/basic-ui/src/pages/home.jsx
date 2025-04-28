@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import Nav from '../components/nav'; // Import Nav component from the correct path
 import Main from '../components/main'; // Import Nav component from the correct path
+import Q from '../components/a'; // Import Nav component from the correct path
 
 const Header = () => {
   useEffect(() => {
@@ -28,6 +29,7 @@ const Header = () => {
     <header>
       <Nav /> {/* Use the Nav component here */}
       <Main />
+      <Q />
     </header>
   );
 };
