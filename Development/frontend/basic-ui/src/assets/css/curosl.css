@@ -1,131 +1,18 @@
-/* General Section Styling */
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin: 40px 0;
-    font-weight: 700;
+/* Ensures the carousel images are the same size and responsive */
+.carousel-image {
+    object-fit: cover !important; /* Ensures images fill the space without distortion */
+    height: 400px !important; /* Set a fixed height for images */
+    width: 100% !important; /* Ensure images are 100% wide */
   }
   
-  .carousel-image {
-    object-fit: cover;
-    height: 300px;  /* Adjust height for better responsiveness */
-  }
-  
+  /* Optional: You can adjust the caption styles as well */
   .carousel-caption {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Adds a semi-transparent background */
+    color: white !important; /* Makes caption text white */
   }
   
-  .carousel-title {
-    font-size: 1.5rem;
-    color: #fff;
-  }
-  
-  .carousel-description {
-    font-size: 1rem;
-    color: #fff;
-  }
-  
+  /* Optional: Adjust the button styles */
   .carousel-button {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-  
-  /* Popular Courses Section */
-  .popular-courses .card {
-    margin-bottom: 20px;
-  }
-  
-  @media (max-width: 767px) {
-    .carousel-image {
-      height: 200px;
-    }
-  
-    .carousel-title {
-      font-size: 1.25rem;
-    }
-  
-    .carousel-description {
-      font-size: 0.9rem;
-    }
-  
-    .carousel-button {
-      font-size: 0.875rem;
-    }
-  }
-  
-  /* Mobile-responsive adjustments */
-  @media (max-width: 576px) {
-    .section-title {
-      font-size: 2rem;  /* Reduce title size on mobile */
-    }
-  
-    .popular-courses .card {
-      padding: 0;
-    }
-  
-    .testimonials .testimonial {
-      padding: 10px;
-    }
-  
-    .category img {
-      width: 100%;
-      height: auto;
-    }
-  
-    .category h4 {
-      font-size: 1rem;
-    }
-  
-    .newsletter input {
-      width: 80%;
-    }
-  
-    .newsletter form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
-
-  .carousel-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 20px;
-    height: 100vh;
-    background-color: #f9f9f9;
-  }
-  
-  .arrow {
-    background-color: #e5e7eb;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .arrow:hover {
-    background-color: #9ca3af;
-    color: #ffffff;
-  }
-  
-  .icon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .slide {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .slide-image {
-    width: 80%;
-    border-radius: 16px;
-    object-fit: cover;
+    margin-top: 10px !important; /* Adds spacing between button and caption */
   }
   
