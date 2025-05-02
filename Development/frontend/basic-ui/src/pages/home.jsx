@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import Nav from '../components/nav'; // Import Nav component from the correct path
 import Curosoul from '../components/main'; // Import Nav component from the correct path
 import WhyChooseUs from '../components/why_choose_us'; // Import Nav component from the correct path
+import Recommendation from '../components/recommendation'; // Import Nav component from the correct path
 
 
 const Header = () => {
@@ -30,6 +31,7 @@ const Header = () => {
     <header>
       <Nav /> {/* Use the Nav component here */}
       <Curosoul />
+      <Recommendation />
       <WhyChooseUs />
     </header>
   );

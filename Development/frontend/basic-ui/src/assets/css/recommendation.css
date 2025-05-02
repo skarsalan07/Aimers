@@ -1,0 +1,94 @@
+.recommendation-container {
+  border: 2px solid #5DADE2; /* Soft blue border */
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  background-color: transparent; /* Transparent background */
+  box-shadow: 0 10px 25px rgba(93, 173, 226, 0.3); /* Soft blue shadow */
+  color: #1A5276; /* Deep blue text color for contrast */
+}
+
+
+.heading {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-shadow: 0 0 10px rgba(33, 150, 243, 0.4);
+}
+
+
+.grid {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: repeat(2, 200px);
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  margin-top: 20px;
+}
+
+.grid__thing {
+  position: relative;
+  background-color: #663399;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.grid__thing:hover {
+  transform: translateY(-5px);
+}
+
+.grid__thing img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.grid__thing:hover img {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.grid__thing:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.start-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.start-btn:hover {
+  background-color: #45a049;
+}

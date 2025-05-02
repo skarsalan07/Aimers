@@ -53,19 +53,19 @@ function Nav_1() {
                   <Nav.Link href="#" className="nav-link active">Home</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="#" className="nav-link">Products</Nav.Link>
+                  <Nav.Link href="#" className="nav-link">Mock Interview</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="#" className="nav-link">Services</Nav.Link>
+                  <Nav.Link href="#" className="nav-link">Roadmaps</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="#" className="nav-link">Portfolio</Nav.Link>
+                  <Nav.Link href="#" className="nav-link">Resume</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="#" className="nav-link">About</Nav.Link>
+                  <Nav.Link href="#" className="nav-link">Feedback</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="#" className="nav-link">Contact</Nav.Link>
+                  <Nav.Link href="#" className="nav-link">About Us</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Navbar.Collapse>
@@ -78,11 +78,6 @@ function Nav_1() {
                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"></path>
                   </svg>
                 </button>
-              </div>
-                <div className="login_signup">
-                  <button className="login_button log">Login</button>
-                  <button className="register_button reg">Sign up</button>
-
               </div>
               {/* New section for Login and Sign up buttons */}
               {/* <button className="theme-toggle" aria-label="Toggle theme">
