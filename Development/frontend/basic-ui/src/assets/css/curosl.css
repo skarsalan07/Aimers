@@ -7,12 +7,13 @@
   
   /* Optional: You can adjust the caption styles as well */
   .carousel-caption {
-    background-color: rgba(0, 0, 0, 0.5) !important; /* Adds a semi-transparent background */
+    /* background-color: black; */
     color: white !important; /* Makes caption text white */
   }
   
   /* Optional: Adjust the button styles */
   .carousel-button {
     margin-top: 10px !important; /* Adds spacing between button and caption */
+    margin-bottom: 10px !important; /* Adds spacing between button and caption */
   }
   
