@@ -4,6 +4,7 @@ import Nav from '../components/nav'; // Import Nav component from the correct pa
 import Curosoul from '../components/main'; // Import Nav component from the correct path
 import WhyChooseUs from '../components/why_choose_us'; // Import Nav component from the correct path
 import Recommendation from '../components/recommendation'; // Import Nav component from the correct path
+import Roadmap from '../components/roadmap'; // Import Nav component from the correct path
 
 
 const Header = () => {
@@ -33,6 +34,7 @@ const Header = () => {
       <Curosoul />
       <Recommendation />
       <WhyChooseUs />
+      <Roadmap />
     </header>
   );
 };
