@@ -635,6 +635,5 @@ body {
 }
 
 input[type="search"]::placeholder {
-    color: #ddd;  /* Light color for the placeholder text */
-  }
-  
+  color: #ddd;  /* Light color for the placeholder text */
+}

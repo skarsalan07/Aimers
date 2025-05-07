@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import '../assets/css/ThemeToggle.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/nav.css';
@@ -46,9 +45,11 @@ function Nav_1() {
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
-                  style={{ backgroundColor: 'transparent' ,color:'white'}}
+                  style={{ backgroundColor: 'transparent', color: 'white' }}
                 />
-                <Button variant="outline-success">Search</Button>
+                <button type="button" className="search-icon-btn" style={{ background: 'transparent', border: 'none' }}>
+                  <i className="bi bi-search" style={{ color: 'white' }}></i>
+                </button>
               </Form>
             </Navbar.Collapse>
           </Container>
