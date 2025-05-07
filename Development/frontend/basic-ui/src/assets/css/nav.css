@@ -504,13 +504,13 @@ body {
         border-bottom: 1px solid var(--border-color);
     }
 
-    .nav-link.active::after {
+    /* .nav-link.active::after {
         display: none;
     }
 
     .nav-link.active {
         background: rgba(33, 150, 243, 0.15);
-    }
+    } */
 
     .dropdown {
         position: static;
@@ -633,3 +633,8 @@ body {
     box-shadow: 0 0 1.25rem rgba(104, 85, 224, 0.6); /* 20px */
     background-color: rgba(104, 85, 224, 1);
 }
+
+input[type="search"]::placeholder {
+    color: #ddd;  /* Light color for the placeholder text */
+  }
+  
