@@ -39,7 +39,7 @@ function Nav_1() {
                   </Nav.Item>
                 ))}
               </Nav>
-              <Form className="d-flex" style={{ backgroundColor: 'transparent' }}>
+              <Form className="d-flex ms-lg-4" style={{ backgroundColor: 'transparent' }}>
                 <Form.Control
                   type="search"
                   placeholder="Search"
