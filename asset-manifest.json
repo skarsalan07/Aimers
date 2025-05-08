@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Aimers/static/css/main.6dd81bdb.css",
+    "main.js": "/Aimers/static/js/main.a4c6e039.js",
+    "index.html": "/Aimers/index.html",
+    "main.6dd81bdb.css.map": "/Aimers/static/css/main.6dd81bdb.css.map",
+    "main.a4c6e039.js.map": "/Aimers/static/js/main.a4c6e039.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6dd81bdb.css",
+    "static/js/main.a4c6e039.js"
+  ]
+}
