@@ -7,8 +7,7 @@ import Recommendation from '../components/recommendation'; // Import Nav compone
 import Roadmap from '../components/roadmap'; // Import Nav component from the correct path
 import Rating from '../components/ratings'; // Import Nav component from the correct path
 import Footer from '../components/footer'; // Import Nav component from the correct path
-import Login from '../components/LoginPage'; // Import Nav component from the correct path
-import Sign from '../components/SignupPage'; // Import Nav component from the correct path
+
 
 
 const Header = () => {
@@ -41,8 +40,7 @@ const Header = () => {
       <Roadmap />
       <Rating />
       <Footer />
-      <Login />
-      <Sign />
+    
     </header>
   );
 };

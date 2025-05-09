@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../assets/css/LoginPage.css';
+
 
 const SignupPage = () => {
   const [username, setUsername] = useState('');
@@ -12,7 +14,6 @@ const SignupPage = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Make API call to register user (e.g., using fetch or axios)
     try {
       const response = await fetch('http://localhost:8000/signup', {
         method: 'POST',
@@ -32,60 +33,69 @@ const SignupPage = () => {
       if (data.error) {
         setError(data.error);
       } else {
-        // Redirect to login page after successful signup
         navigate('/login');
       }
-    } catch (error) {
+    } catch (err) {
       setError('An error occurred during signup.');
     }
   };
 
   return (
-    <div>
+    <div className="login-box">
       <h2>Signup</h2>
       <form onSubmit={handleSignup}>
-        <div>
-          <label>Username:</label>
+        <div className="user-box">
           <input
             type="text"
+            required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
+          <label>Username</label>
         </div>
-        <div>
-          <label>Email:</label>
+        <div className="user-box">
           <input
             type="email"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
+          <label>Email</label>
         </div>
-        <div>
-          <label>Password:</label>
+        <div className="user-box">
           <input
             type="password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
+          <label>Password</label>
         </div>
-        <div>
-          <label>Interests:</label>
+        <div className="user-box">
           <input
             type="text"
+            required
             value={interests}
             onChange={(e) => setInterests(e.target.value)}
-            placeholder="Enter interests separated by commas"
-            required
           />
+          <label>Interests (comma-separated)</label>
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Sign Up</button>
+
+        <button type="submit" className="glow-button">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Sign Up
+        </button>
       </form>
-      <p>Already have an account? <a href="/login">Login</a></p>
+      <p style={{ color: '#fff', marginTop: '20px' }}>
+        Already have an account?{' '}
+        <a href="/login" style={{ color: '#03E9F4' }}>Login</a>
+      </p>
     </div>
   );
 };
+
 export default SignupPage;
