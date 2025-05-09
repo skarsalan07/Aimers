@@ -8,7 +8,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Make a POST request to the backend for login
     const response = await fetch("http://localhost:8000/login", {
       method: "POST",
@@ -26,6 +26,9 @@ const LoginPage = () => {
     // Handle the response from the backend
     if (response.ok) {
       // Redirect to the home page on successful login
+      alert("login success");
+
+
       navigate("/");
     } else {
       // Handle error (e.g., show a message that login failed)
