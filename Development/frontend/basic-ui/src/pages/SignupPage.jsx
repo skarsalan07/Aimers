@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/LoginPage.css';
-
+import '../assets/css/LoginPage.css'; // Ensure the glow-button and animation CSS is here
 
 const SignupPage = () => {
   const [username, setUsername] = useState('');
@@ -9,6 +8,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [interests, setInterests] = useState('');
   const [error, setError] = useState('');
+  const [showAnimation, setShowAnimation] = useState(false);
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
@@ -33,7 +33,10 @@ const SignupPage = () => {
       if (data.error) {
         setError(data.error);
       } else {
-        navigate('/login');
+        setShowAnimation(true);
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000); // Wait 2 seconds for the animation before navigating
       }
     } catch (err) {
       setError('An error occurred during signup.');
@@ -94,6 +97,16 @@ const SignupPage = () => {
         Already have an account?{' '}
         <a href="/login" style={{ color: '#03E9F4' }}>Login</a>
       </p>
+
+      {showAnimation && (
+        <div className="success-animation" style={{ marginTop: '30px', textAlign: 'center' }}>
+          <p style={{ color: '#03E9F4', fontSize: '18px' }}>Signup successful! Redirecting...</p>
+          <div className="glow-button" style={{ pointerEvents: 'none' }}>
+            <span></span><span></span><span></span><span></span>
+            
+          </div>
+        </div>
+      )}
     </div>
   );
 };

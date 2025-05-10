@@ -637,3 +637,28 @@ body {
 input[type="search"]::placeholder {
   color: #ddd;  /* Light color for the placeholder text */
 }
+
+@media (max-width: 767px) {
+  .ms-3 {
+    margin-top: 1rem !important;
+    margin-left: 0rem !important;
+
+  }
+}
+
+
+.login-btn {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  padding: 6px 18px;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.login-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: scale(1.05);
+}

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../assets/css/LoginPage.css';
 
-
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showGlow, setShowGlow] = useState(false); // <-- for glow animation
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,8 +22,11 @@ const LoginPage = () => {
     const data = await response.json();
 
     if (response.ok) {
-      alert("login success");
-      navigate("/");
+      setShowGlow(true); // Show glow animation
+      setTimeout(() => {
+        alert("Login success");
+        navigate("/");
+      }, 2000); // Wait 2s before navigating
     } else {
       alert(data.detail || "Login failed. Please try again.");
     }
@@ -59,8 +62,19 @@ const LoginPage = () => {
           Login
         </button>
       </form>
+
+      {showGlow && (
+        <button className="glow-button">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Login Successful !
+        </button>
+      )}
     </div>
   );
 };
 
 export default LoginPage;
+  

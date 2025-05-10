@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button'; // Import Button
 import '../assets/css/ThemeToggle.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/nav.css';
 
 function Nav_1() {
   const [activeLink, setActiveLink] = useState('Home');
+
+  useEffect(() => {
+    // Your existing logic here
+  }, []);
 
   const handleSelect = (selectedKey) => {
     setActiveLink(selectedKey);
@@ -39,6 +44,8 @@ function Nav_1() {
                   </Nav.Item>
                 ))}
               </Nav>
+
+              {/* Search box */}
               <Form className="d-flex ms-lg-4" style={{ backgroundColor: 'transparent' }}>
                 <Form.Control
                   type="search"
@@ -51,6 +58,15 @@ function Nav_1() {
                   <i className="bi bi-search" style={{ color: 'white' }}></i>
                 </button>
               </Form>
+
+              {/* Login button */}
+              <Button
+                variant="outline-light"
+                className="login-btn ms-3"
+                href="/login"
+              >
+                Login
+              </Button>
             </Navbar.Collapse>
           </Container>
         </Navbar>
