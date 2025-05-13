@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../assets/css/LoginPage.css';
+import "../assets/css/LoginPage.css";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showGlow, setShowGlow] = useState(false); // <-- for glow animation
+  const [showGlow, setShowGlow] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,14 +22,18 @@ const LoginPage = () => {
     const data = await response.json();
 
     if (response.ok) {
-      setShowGlow(true); // Show glow animation
+      setShowGlow(true);
       setTimeout(() => {
         alert("Login success");
         navigate("/");
-      }, 2000); // Wait 2s before navigating
+      }, 2000);
     } else {
       alert(data.detail || "Login failed. Please try again.");
     }
+  };
+
+  const handleSignupRedirect = () => {
+    navigate("/signup");
   };
 
   return (
@@ -54,13 +58,28 @@ const LoginPage = () => {
           />
           <label>Password</label>
         </div>
-        <button type="submit" className="animated-button">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Login
-        </button>
+
+        <div className="button-group">
+          <button type="submit" className="animated-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Login
+          </button>
+
+          <button
+            type="button"
+            onClick={handleSignupRedirect}
+            className="animated-button"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Signup
+          </button>
+        </div>
       </form>
 
       {showGlow && (
@@ -77,4 +96,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-  
