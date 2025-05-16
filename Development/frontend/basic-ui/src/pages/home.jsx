@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
-
-import Nav from '../components/nav'; // Import Nav component from the correct path
-import Curosoul from '../components/main'; // Import Nav component from the correct path
-import WhyChooseUs from '../components/why_choose_us'; // Import Nav component from the correct path
-import Recommendation from '../components/recommendation'; // Import Nav component from the correct path
-import Roadmap from '../components/roadmap'; // Import Nav component from the correct path
-import Rating from '../components/ratings'; // Import Nav component from the correct path
-import Footer from '../components/footer'; // Import Nav component from the correct path
-
-
+import Nav from '../components/nav';
+import Curosoul from '../components/main';
+import WhyChooseUs from '../components/why_choose_us';
+import Recommendation from '../components/recommendation';
+import Roadmap from '../components/roadmap';
+import Rating from '../components/ratings';
+import Footer from '../components/footer';
 
 const Header = () => {
   useEffect(() => {
@@ -21,7 +18,6 @@ const Header = () => {
       });
     }
 
-    // Optional cleanup if needed
     return () => {
       if (toggle && menu) {
         toggle.removeEventListener('click', () => {
@@ -33,14 +29,13 @@ const Header = () => {
 
   return (
     <header>
-      <Nav /> {/* Use the Nav component here */}
+      <Nav />
       <Curosoul />
       <Recommendation />
       <WhyChooseUs />
       <Roadmap />
       <Rating />
       <Footer />
-    
     </header>
   );
 };

@@ -22,6 +22,9 @@ const LoginPage = () => {
     const data = await response.json();
 
     if (response.ok) {
+      // ✅ Save to localStorage
+      localStorage.setItem("username", username);
+
       setShowGlow(true);
       setTimeout(() => {
         alert("Login success");
@@ -60,36 +63,19 @@ const LoginPage = () => {
         </div>
 
         <div className="button-group">
-          <button type="submit" className="animated-button">
+          <button type="submit" className="animated-button">  <span></span>
             <span></span>
             <span></span>
+            <span></span>Login</button>
+          <button type="button" onClick={handleSignupRedirect} className="animated-button">  <span></span>
             <span></span>
             <span></span>
-            Login
-          </button>
-
-          <button
-            type="button"
-            onClick={handleSignupRedirect}
-            className="animated-button"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Signup
-          </button>
+            <span></span>Signup</button>
         </div>
       </form>
 
       {showGlow && (
-        <button className="glow-button">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Login Successful !
-        </button>
+        <button className="glow-button">Login Successful!</button>
       )}
     </div>
   );

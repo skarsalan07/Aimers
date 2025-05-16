@@ -662,3 +662,22 @@ input[type="search"]::placeholder {
   border-color: #ffffff;
   transform: scale(1.05);
 }
+.username-display {
+  padding: 6px 12px;
+  background-color: #ffffff22;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: 1px solid #ffffff44;
+  border-radius: 50px;
+  box-shadow: 0 0 5px #ffffff33;
+  white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  .username-display {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    margin-bottom: 0.5rem;
+  }
+}
