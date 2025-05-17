@@ -34,7 +34,7 @@ const SignupPage = () => {
       setError("Password must be at least 6 characters.");
       return;
     }
-    if (trimmedInterests.length !== 3) {
+    if (trimmedInterests.length !==1) {
       setError("Please enter exactly 3 comma-separated interests.");
       return;
     }

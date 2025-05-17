@@ -1,20 +1,21 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from passlib.context import CryptContext
 from pydantic import BaseModel, EmailStr
-from bson import ObjectId
-import jwt
-import os
 from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
+import jwt
+import pickle
+from sklearn.metrics.pairwise import cosine_similarity
 
+# Create FastAPI app once
 app = FastAPI()
 
-# Middleware for CORS
+# CORS middleware (adjust origins for production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000"],  # your React app origin
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -36,6 +37,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
+# Pydantic models
 class User(BaseModel):
     username: str
     email: EmailStr
@@ -48,6 +50,7 @@ class LoginRequest(BaseModel):
     password: str
 
 
+# Helper function to create JWT token
 def create_token(data: dict):
     to_encode = data.copy()
     expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -59,7 +62,7 @@ def create_token(data: dict):
 async def signup(user: User):
     if users_collection.find_one({"username": user.username}):
         raise HTTPException(status_code=400, detail="Username already exists")
-    
+
     hashed_pwd = pwd_context.hash(user.password)
     user_data = {
         "username": user.username,
@@ -87,6 +90,27 @@ def read_users_me(token: str = Depends(oauth2_scheme)):
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub")
         user = users_collection.find_one({"username": username})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
         return {"username": username, "interests": user["interests"]}
-    except Exception:
+    except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
+
+
+# Load recommender model once on startup
+with open("model/recommender.pkl", "rb") as f:
+    tag_vectors, vectorizer, data = pickle.load(f)
+
+
+@app.get("/")
+def read_root():
+    return {"message": "Interview Recommendation API is running."}
+
+
+@app.get("/recommend")
+def recommend_interviews(query: str = Query(..., min_length=1)):
+    user_vec = vectorizer.transform([query])
+    similarities = cosine_similarity(user_vec, tag_vectors).flatten()
+    top_indices = similarities.argsort()[::-1][:6]
+    recommendations = data.iloc[top_indices]["topic"].tolist()
+    return {"recommendations": recommendations}

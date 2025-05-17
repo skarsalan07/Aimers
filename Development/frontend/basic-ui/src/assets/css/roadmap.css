@@ -175,8 +175,7 @@
 
 .start-btn {
   padding: 10px 20px;
-  background-color: #4CAF50;
-  /* Green button */
+  background-color: #007bff; /* Bright Blue */
   color: white;
   border: none;
   border-radius: 5px;
@@ -187,6 +186,6 @@
 }
 
 .start-btn:hover {
-  background-color: #45a049;
+   background-color: #0056b3; /* Darker Blue */
   /* Darker green on hover */
 }
