@@ -4,7 +4,6 @@ import Curosoul from '../components/main';
 import WhyChooseUs from '../components/why_choose_us';
 import Recommendation from '../components/recommendation';
 import Roadmap from '../components/roadmap';
-import Rating from '../components/ratings';
 import Footer from '../components/footer';
 
 const Header = () => {
@@ -34,7 +33,6 @@ const Header = () => {
       <Recommendation />
       <WhyChooseUs />
       <Roadmap />
-      <Rating />
       <Footer />
     </header>
   );

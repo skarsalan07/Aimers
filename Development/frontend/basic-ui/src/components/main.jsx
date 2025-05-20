@@ -3,6 +3,7 @@ import { Carousel, Button } from 'react-bootstrap';
 import '../assets/css/curosl.css';
 import image1 from '../assets/images/1.webp';
 import Roadmap from '../assets/images/roadmap.jpg';
+import Test from '../assets/images/test.jpg';
 
 const CoursePage = () => {
   return (
@@ -32,26 +33,16 @@ const CoursePage = () => {
         </Carousel.Item>
 
         <Carousel.Item>
-          <img className="d-block w-100 carousel-image" src="https://www.mygreatlearning.com/blog/wp-content/uploads/2019/09/What-is-data-science-2.jpg" alt="Deep Learning" />
+          <img className="d-block w-100 carousel-image" src={Test} alt="Test" />
           <Carousel.Caption className="carousel-caption">
             <div className="caption-overlay">
-              <h3 className="carousel-title">Deep Learning</h3>
-              <p className="carousel-description">Test, Learn, Grow.</p>
+              <h3 className="carousel-title">Test</h3>
+              <p className="carousel-description">Test Today, Succeed Tomorrow.</p>
               <Button className="carousel-button" variant="primary" href="/course-3">Explore</Button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
 
-        <Carousel.Item>
-          <img className="d-block w-100 carousel-image" src="https://www.mygreatlearning.com/blog/wp-content/uploads/2019/09/What-is-data-science-2.jpg" alt="Roadmap Generator" />
-          <Carousel.Caption className="carousel-caption">
-            <div className="caption-overlay">
-              <h3 className="carousel-title">Roadmap Generator</h3>
-              <p className="carousel-description">Your Path, Your Plan.</p>
-              <Button className="carousel-button" variant="primary" href="/course-4">Explore</Button>
-            </div>
-          </Carousel.Caption>
-        </Carousel.Item>
       </Carousel>
     </div>
   );

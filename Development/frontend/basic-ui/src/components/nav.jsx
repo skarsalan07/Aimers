@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';  // import this
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button';  // added Button since used below
 import '../assets/css/ThemeToggle.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/nav.css';
 
 function Nav_1() {
+  const location = useLocation();  // get current route
   const [activeLink, setActiveLink] = useState('Home');
   const [username, setUsername] = useState('');
 
@@ -18,6 +20,20 @@ function Nav_1() {
       setUsername(storedUser);
     }
   }, []);
+
+  // Map pathname to nav link names
+  useEffect(() => {
+    const pathToLink = {
+      '/': 'Home',
+      '/mock-interview': 'Mock Interview',
+      '/roadmaps': 'Roadmaps',
+      '/test': 'Test',
+      '/about-us': 'About Us',
+    };
+
+    const currentLink = pathToLink[location.pathname] || 'Home';
+    setActiveLink(currentLink);
+  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem('username');
@@ -32,23 +48,26 @@ function Nav_1() {
     <header className="header">
       <Navbar expand="lg" className="navbar">
         <Container>
-          <Navbar.Brand href="#" className="logo">Aimers</Navbar.Brand>
+          <Navbar.Brand href="/" className="logo">Aimers</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-nav" className="nav-toggle">
             <span className="hamburger"><span></span><span></span><span></span></span>
           </Navbar.Toggle>
           <Navbar.Collapse id="navbar-nav">
             <Nav className="ms-auto me-3" onSelect={handleSelect}>
-              {['Home', 'Mock Interview', 'Roadmaps', 'Resume', 'Feedback', 'About Us'].map((name) => (
-                <Nav.Item key={name}>
-                  <Nav.Link
-                    eventKey={name}
-                    href="#"
-                    className={`nav-link ${activeLink === name ? 'active' : ''}`}
-                  >
-                    {name}
-                  </Nav.Link>
-                </Nav.Item>
-              ))}
+              {['Home', 'Mock Interview', 'Roadmaps', 'Test', 'About Us'].map((name) => {
+                const linkPath = name === 'Home' ? '/' : `/${name.toLowerCase().replace(/\s+/g, '-')}`;
+                return (
+                  <Nav.Item key={name}>
+                    <Nav.Link
+                      eventKey={name}
+                      href={linkPath}
+                      className={`nav-link ${activeLink === name ? 'active' : ''}`}
+                    >
+                      {name}
+                    </Nav.Link>
+                  </Nav.Item>
+                );
+              })}
             </Nav>
 
             {/* Search box */}
@@ -65,7 +84,7 @@ function Nav_1() {
               </button>
             </Form>
 
-            {/* User image + Logout button responsive */}
+            {/* User image + Logout button */}
             <div className="d-flex align-items-center ms-3 flex-wrap">
               {username ? (
                 <>
@@ -80,6 +99,7 @@ function Nav_1() {
                       overflow: 'hidden',
                       cursor: 'default',
                       flexShrink: 0,
+                      marginRight: '10px',
                     }}
                     title={username}
                   >
@@ -89,7 +109,9 @@ function Nav_1() {
                       style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
                     />
                   </div>
-                  
+                  <Button variant="outline-light" onClick={handleLogout}>
+                    Logout
+                  </Button>
                 </>
               ) : (
                 <Button variant="outline-light" className="login-btn" href="/login">
@@ -105,3 +127,4 @@ function Nav_1() {
 }
 
 export default Nav_1;
+

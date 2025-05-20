@@ -40,43 +40,48 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-box">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="user-box">
-          <input
-            type="text"
-            required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <label>Username</label>
-        </div>
-        <div className="user-box">
-          <input
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label>Password</label>
-        </div>
+    <div>
+      <button className="top-left-home-button" onClick={() => navigate("/")}>
+        ← Home
+      </button>
+      <div className="login-box">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="user-box">
+            <input
+              type="text"
+              required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <label>Username</label>
+          </div>
+          <div className="user-box">
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label>Password</label>
+          </div>
 
-        <div className="button-group">
-          <button type="submit" className="animated-button">  <span></span>
-            <span></span>
-            <span></span>
-            <span></span>Login</button>
-          <button type="button" onClick={handleSignupRedirect} className="animated-button">  <span></span>
-            <span></span>
-            <span></span>
-            <span></span>Signup</button>
-        </div>
-      </form>
+          <div className="button-group">
+            <button type="submit" className="animated-button">  <span></span>
+              <span></span>
+              <span></span>
+              <span></span>Login</button>
+            <button type="button" onClick={handleSignupRedirect} className="animated-button">  <span></span>
+              <span></span>
+              <span></span>
+              <span></span>Signup</button>
+          </div>
+        </form>
 
-      {showGlow && (
-        <button className="glow-button">Login Successful!</button>
-      )}
+        {showGlow && (
+          <button className="glow-button">Login Successful!</button>
+        )}
+      </div>
     </div>
   );
 };
