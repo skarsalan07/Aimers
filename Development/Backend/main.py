@@ -8,6 +8,11 @@ from datetime import datetime, timedelta
 import jwt
 import pickle
 from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
+import random
+from sentence_transformers import util
+from models.model_loader import get_model
+
 
 # Create FastAPI app once
 app = FastAPI()
@@ -114,3 +119,43 @@ def recommend_interviews(query: str = Query(..., min_length=1)):
     top_indices = similarities.argsort()[::-1][:6]
     recommendations = data.iloc[top_indices]["topic"].tolist()
     return {"recommendations": recommendations}
+
+
+
+
+
+
+#//////////////////interview module ///////////////////////////////
+# Load model and data
+model = get_model()
+df = pd.read_csv("model/datasets/ML1.csv")
+threshold = 0.75
+
+class AnswerInput(BaseModel):
+    question: str
+    user_answer: str
+
+@app.get("/question")
+def get_random_question():
+    row = df.sample(n=1).iloc[0]
+    return {
+        "question": row["question"],
+        "ideal_answer": row["answer"]  # optional, remove if hiding ideal
+    }
+
+@app.post("/evaluate")
+def evaluate_answer(data: AnswerInput):
+    emb1 = model.encode(data.user_answer, convert_to_tensor=True)
+    emb2 = model.encode(df[df["question"] == data.question]["answer"].values[0], convert_to_tensor=True)
+    similarity = util.pytorch_cos_sim(emb1, emb2).item()
+
+    if len(data.user_answer.split()) < 4:
+        result = "⚠️ Too short! Try explaining more."
+    else:
+        result = "✅ Relevant / Correct" if similarity >= threshold else "❌ Irrelevant / Incorrect"
+
+    return {
+        "similarity": round(similarity, 4),
+        "evaluation": result
+    }
+    

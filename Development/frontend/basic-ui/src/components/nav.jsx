@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';  // import this
+import { useLocation, Link } from 'react-router-dom'; // using Link instead of href
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';  // added Button since used below
+import Button from 'react-bootstrap/Button';
 import '../assets/css/ThemeToggle.css';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/nav.css';
 
 function Nav_1() {
-  const location = useLocation();  // get current route
+  const location = useLocation();
   const [activeLink, setActiveLink] = useState('Home');
   const [username, setUsername] = useState('');
 
@@ -21,7 +21,6 @@ function Nav_1() {
     }
   }, []);
 
-  // Map pathname to nav link names
   useEffect(() => {
     const pathToLink = {
       '/': 'Home',
@@ -48,7 +47,9 @@ function Nav_1() {
     <header className="header">
       <Navbar expand="lg" className="navbar">
         <Container>
-          <Navbar.Brand href="/" className="logo">Aimers</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/" className="logo">
+            Aimers
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-nav" className="nav-toggle">
             <span className="hamburger"><span></span><span></span><span></span></span>
           </Navbar.Toggle>
@@ -59,8 +60,9 @@ function Nav_1() {
                 return (
                   <Nav.Item key={name}>
                     <Nav.Link
+                      as={Link}
+                      to={linkPath}
                       eventKey={name}
-                      href={linkPath}
                       className={`nav-link ${activeLink === name ? 'active' : ''}`}
                     >
                       {name}
@@ -70,7 +72,6 @@ function Nav_1() {
               })}
             </Nav>
 
-            {/* Search box */}
             <Form className="d-flex ms-lg-4">
               <Form.Control
                 type="search"
@@ -84,7 +85,6 @@ function Nav_1() {
               </button>
             </Form>
 
-            {/* User image + Logout button */}
             <div className="d-flex align-items-center ms-3 flex-wrap">
               {username ? (
                 <>
@@ -114,7 +114,7 @@ function Nav_1() {
                   </Button>
                 </>
               ) : (
-                <Button variant="outline-light" className="login-btn" href="/login">
+                <Button variant="outline-light" className="login-btn" as={Link} to="/login">
                   Login
                 </Button>
               )}
@@ -127,4 +127,3 @@ function Nav_1() {
 }
 
 export default Nav_1;
-

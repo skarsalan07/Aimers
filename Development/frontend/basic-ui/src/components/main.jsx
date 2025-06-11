@@ -39,7 +39,7 @@ const CoursePage = () => {
               <h3 className="carousel-title">Test</h3>
               <p className="carousel-description">Test Today, Succeed Tomorrow.</p>
               <Button className="carousel-button" variant="primary" href="/course-3">Explore</Button>
-            </div>
+            </div>  
           </Carousel.Caption>
         </Carousel.Item>
 

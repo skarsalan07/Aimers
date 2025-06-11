@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from '../components/nav';
-import '../assets/css/about_us.css';
+import Footer from '../components/footer';
 
 const AboutUs = () => {
   return (
@@ -44,6 +44,7 @@ const AboutUs = () => {
         </section>
 
       </div>
+      <Footer />
     </>
   );
 };
