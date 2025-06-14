@@ -2,8 +2,34 @@ import React, { useEffect, useState, useRef } from "react";
 import '../assets/css/start_interview.css';
 
 const MAX_QUESTIONS = 15;
+const CORRECT_SOUND = 'https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3';
+const WRONG_SOUND = 'https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3';
+const TRANSITION_SOUND = 'https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3';
 
-// Typing animation component
+const GREETINGS = {
+  correct: [
+    "Great job! 🎉",
+    "Perfect! 👏",
+    "Excellent answer! 💯",
+    "You nailed it! 🔥",
+    "Brilliant! 🌟"
+  ],
+  wrong: [
+    "Oops! Try again 💪",
+    "Almost there! Keep going 🚀",
+    "Not quite, but you're learning! 📚",
+    "Good attempt! Let's try another one 🤓",
+    "Don't worry, you'll get the next one! 👍"
+  ],
+  next: [
+    "Moving to next question...",
+    "Let's proceed...",
+    "Next challenge coming up!",
+    "Here we go!",
+    "Ready for the next one?"
+  ]
+};
+
 const TypingText = ({ text, speed = 30, onComplete }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,19 +56,7 @@ const TypingText = ({ text, speed = 30, onComplete }) => {
   return <span>{displayedText}</span>;
 };
 
-// Subcomponents
-const SpeakingIndicator = ({ text }) => (
-  <div className="speaking-box">
-    <div className="speaking-indicator">
-      <div className="dot"></div>
-      <div className="dot"></div>
-      <div className="dot"></div>
-    </div>
-    <p><TypingText text={text} speed={20} /></p>
-  </div>
-);
-
-const QuestionBox = ({ question, index, category, difficulty }) => {
+const QuestionBox = ({ question, index, category, difficulty, showSpeakingIndicator = false, speakingText = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -52,13 +66,16 @@ const QuestionBox = ({ question, index, category, difficulty }) => {
   }, [question]);
 
   return (
-    <div className={`question-box ${isVisible ? 'visible' : ''}`}>
-      <div className="question-meta">
-        <span className="question-number">Question {index + 1}</span>
-        {category && <span className="question-category">{category}</span>}
-        {difficulty && <span className={`question-difficulty ${difficulty.toLowerCase()}`}>{difficulty}</span>}
+    <div className={`question-container ${isVisible ? 'visible' : ''}`}>
+      
+      <div className={`question-box ${isVisible ? 'visible' : ''}`}>
+        <div className="question-meta">
+          <span className="question-number">Question {index + 1}</span>
+          {category && <span className="question-category">{category}</span>}
+          {difficulty && <span className={`question-difficulty ${difficulty.toLowerCase()}`}>{difficulty}</span>}
+        </div>
+        <p className="question-text"><TypingText text={question} speed={10} /></p>
       </div>
-      <p className="question-text"><TypingText text={question} speed={10} /></p>
     </div>
   );
 };
@@ -161,7 +178,6 @@ const SessionSummary = ({ session, elapsedTime, onRestart }) => {
   );
 };
 
-// Main Component
 function QuestionEvaluator() {
   const [session, setSession] = useState({
     questions: [],
@@ -183,21 +199,23 @@ function QuestionEvaluator() {
   const [showHistory, setShowHistory] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
   const [showSummary, setShowSummary] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [isTransitioning, setIsTransitioning] = useState(false);
   
   const timerRef = useRef(null);
   const recognitionRef = useRef(null);
   const answerRef = useRef(null);
+  const correctSoundRef = useRef(new Audio(CORRECT_SOUND));
+  const wrongSoundRef = useRef(new Audio(WRONG_SOUND));
+  const transitionSoundRef = useRef(new Audio(TRANSITION_SOUND));
 
-  // Initialize speech recognition and timer
   useEffect(() => {
-    // Timer setup
     timerRef.current = setInterval(() => {
       if (!timerPaused) {
         setElapsedTime(prev => prev + 1);
       }
     }, 1000);
 
-    // Speech recognition setup
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
       setSpeechSupported(true);
@@ -224,7 +242,6 @@ function QuestionEvaluator() {
       setVoiceEnabled(false);
     }
 
-    // Load session from localStorage if exists
     const savedSession = localStorage.getItem('interviewSession');
     if (savedSession) {
       const parsedSession = JSON.parse(savedSession);
@@ -242,6 +259,21 @@ function QuestionEvaluator() {
       window.speechSynthesis.cancel();
     };
   }, [timerPaused]);
+
+  const getRandomGreeting = (type) => {
+    const greetings = GREETINGS[type];
+    return greetings[Math.floor(Math.random() * greetings.length)];
+  };
+
+  const playSound = (soundRef) => {
+    soundRef.current.currentTime = 0;
+    soundRef.current.play().catch(e => console.log("Audio play failed:", e));
+  };
+
+  const showFeedback = (message, duration = 2000) => {
+    setFeedbackMessage(message);
+    setTimeout(() => setFeedbackMessage(""), duration);
+  };
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -375,6 +407,15 @@ function QuestionEvaluator() {
         return updated;
       });
       
+      const isGoodAnswer = data.similarity >= 0.7;
+      if (isGoodAnswer) {
+        playSound(correctSoundRef);
+        showFeedback(getRandomGreeting('correct'));
+      } else {
+        playSound(wrongSoundRef);
+        showFeedback(getRandomGreeting('wrong'));
+      }
+
       if (voiceEnabled && speechSupported) {
         speak(`Evaluation: ${data.evaluation}. Score: ${Math.round(data.similarity * 100)}%`);
       } else {
@@ -402,12 +443,16 @@ function QuestionEvaluator() {
     }
   };
 
-  const navigateQuestion = (direction) => {
+  const navigateQuestion = async (direction) => {
     const newIndex = direction === 'next' 
       ? session.currentIndex + 1 
       : session.currentIndex - 1;
 
     if (newIndex >= 0 && newIndex <= session.questions.length) {
+      setIsTransitioning(true);
+      playSound(transitionSoundRef);
+      showFeedback(getRandomGreeting('next'), 1500);
+
       // Save current answer before navigating
       const updatedAnswers = [...session.answers];
       updatedAnswers[session.currentIndex] = answer;
@@ -425,9 +470,11 @@ function QuestionEvaluator() {
       // Set the answer for the new question
       setAnswer(updatedAnswers[newIndex] || "");
 
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       if (newIndex === session.questions.length) {
         if (session.questions.length < MAX_QUESTIONS) {
-          fetchQuestion();
+          await fetchQuestion();
         } else {
           setShowSummary(true);
         }
@@ -437,6 +484,8 @@ function QuestionEvaluator() {
         setSpeakingText(`Question ${newIndex + 1}: ${session.questions[newIndex]}`);
         setTimeout(() => setSpeakingText(""), 3000);
       }
+      
+      setIsTransitioning(false);
     }
   };
 
@@ -450,6 +499,10 @@ function QuestionEvaluator() {
 
   const toggleTimer = () => {
     setTimerPaused(prev => !prev);
+  };
+
+  const goHome = () => {
+    startNewSession();
   };
 
   const currentQuestion = session.questions[session.currentIndex];
@@ -469,7 +522,11 @@ function QuestionEvaluator() {
   }
 
   return (
-    <div className="evaluator-container">
+    <div className={`evaluator-container ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
+      <button className="home-button" onClick={goHome}>
+        🏠
+      </button>
+
       <div className="options-bar">
         <div className="options-left">
           <button 
@@ -522,15 +579,19 @@ function QuestionEvaluator() {
 
       <ProgressBar 
         current={session.currentIndex + 1} 
-        total={Math.min(session.questions.length + 1, MAX_QUESTIONS)} 
+        total={MAX_QUESTIONS} 
       />
-
-      {speakingText && <SpeakingIndicator text={speakingText} />}
 
       {error && (
         <div className="error-message">
           <span role="img" aria-label="error">⚠️</span> {error}
           <button onClick={() => setError(null)}>×</button>
+        </div>
+      )}
+
+      {feedbackMessage && (
+        <div className={`feedback-message ${feedbackMessage.includes('Oops') ? 'error' : 'success'}`}>
+          {feedbackMessage}
         </div>
       )}
 
@@ -540,6 +601,8 @@ function QuestionEvaluator() {
           index={session.currentIndex}
           category="Technical"
           difficulty="Easy"
+          showSpeakingIndicator={!!speakingText}
+          speakingText={speakingText}
         />
       )}
 
@@ -573,7 +636,7 @@ function QuestionEvaluator() {
       <div className="button-row">
         <button 
           onClick={() => navigateQuestion('prev')} 
-          disabled={session.currentIndex <= 0 || isSpeaking}
+          disabled={session.currentIndex <= 0 || isSpeaking || isTransitioning}
           className="nav-button"
         >
           <span role="img" aria-label="previous">⬅️</span> Previous
@@ -581,7 +644,7 @@ function QuestionEvaluator() {
         
         <button 
           onClick={evaluateAnswer} 
-          disabled={!answer.trim() || isSpeaking || currentResult}
+          disabled={!answer.trim() || isSpeaking || currentResult || isTransitioning}
           className={`primary-action ${currentResult ? 'answered' : ''}`}
         >
           <span role="img" aria-label="submit">
@@ -591,22 +654,13 @@ function QuestionEvaluator() {
         
         <button 
           onClick={() => navigateQuestion('next')} 
-          disabled={isSpeaking || (session.currentIndex === session.questions.length && session.questions.length >= MAX_QUESTIONS)}
+          disabled={isSpeaking || isTransitioning || (session.currentIndex === session.questions.length && session.questions.length >= MAX_QUESTIONS)}
           className="nav-button"
         >
           <span role="img" aria-label="next">➡️</span> 
           {session.currentIndex === session.questions.length 
             ? session.questions.length < MAX_QUESTIONS ? 'New Question' : 'Finish'
             : 'Next'}
-        </button>
-      </div>
-
-      <div className="end-session-row">
-        <button 
-          onClick={endSession}
-          className="end-session-button"
-        >
-          <span role="img" aria-label="end">⏹️</span> End Session
         </button>
       </div>
 

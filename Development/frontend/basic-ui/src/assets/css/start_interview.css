@@ -649,3 +649,59 @@ body {
     margin: 0.5rem 0;
   }
 }
+
+/* Add these to your existing CSS file */
+
+/* Feedback Message */
+.feedback-message {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: var(--border-radius);
+  text-align: center;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease;
+  box-shadow: var(--box-shadow);
+}
+
+.feedback-message.success {
+  background-color: rgba(76, 175, 80, 0.2);
+  border-left: 4px solid var(--success-color);
+  color: var(--success-color);
+}
+
+.feedback-message.error {
+  background-color: rgba(244, 67, 54, 0.2);
+  border-left: 4px solid var(--danger-color);
+  color: var(--danger-color);
+}
+
+/* Smooth transition for question changes */
+.question-box {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Home button styling */
+.home-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.home-button:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}

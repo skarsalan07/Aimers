@@ -20,7 +20,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/about-us" element={<Aboutus />} />
         <Route path="/mock-interview" element={<Mockinterview />} />
-        <Route path="/start_interview" element={<Startinterview />} />
+        <Route path="/start-interview/ml" element={<Startinterview />} />
      
 
       </Routes>
