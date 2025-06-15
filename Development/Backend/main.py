@@ -152,7 +152,7 @@ def evaluate_answer(data: AnswerInput):
     if len(data.user_answer.split()) < 4:
         result = "⚠️ Too short! Try explaining more."
     else:
-        result = "✅ Relevant / Correct" if similarity >= threshold else "❌ Irrelevant / Incorrect"
+        result = " Correct and your answer accuracy is" if similarity >= threshold else "Your answer is incorrect"
 
     return {
         "similarity": round(similarity, 4),
