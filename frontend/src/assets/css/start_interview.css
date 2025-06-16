@@ -1,0 +1,1401 @@
+/* Base Styles */
+:root {
+  --primary-color: #4361ee;
+  --primary-dark: #3a0ca3;
+  --secondary-color: #4cc9f0;
+  --accent-color: #f72585;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --gray-color: #6c757d;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --danger-color: #f44336;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--dark-color);
+  background-color: #f5f7fa;
+}
+
+/* Evaluator Container */
+.evaluator-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--gray-color);
+  font-size: 1rem;
+}
+
+/* Options Bar */
+.options-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.menu-button {
+  background: var(--primary-color);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.menu-button:hover {
+  background: var(--primary-dark);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  width: 300px;
+  z-index: 100;
+  box-shadow: var(--box-shadow);
+  border: 1px solid #e9ecef;
+  margin-top: 0.5rem;
+}
+
+.menu-section {
+  margin-bottom: 1rem;
+}
+
+.menu-section h4 {
+  margin: 0 0 0.8rem 0;
+  color: var(--primary-color);
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.history-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f1f3f5;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.history-list li:last-child {
+  border-bottom: none;
+}
+
+.history-list span {
+  display: inline-block;
+  width: 30%;
+}
+
+.menu-actions button {
+  background: #f8f9fa;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: var(--border-radius);
+  color: var(--dark-color);
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+  width: 100%;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.menu-actions button:hover {
+  background: #e9ecef;
+}
+
+.timer-display {
+  background: #f8f9fa;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: monospace;
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  position: absolute;
+  right: 0;
+  top: -25px;
+  font-size: 0.8rem;
+  color: var(--gray-color);
+}
+
+/* Speaking Indicator */
+.speaking-box {
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid var(--secondary-color);
+  animation: fadeIn 0.3s ease;
+}
+
+.speaking-indicator {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.speaking-indicator .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.speaking-indicator .dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.speaking-indicator .dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Question Box */
+.question-box {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--box-shadow);
+  border-left: 4px solid var(--primary-color);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.question-box.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.question-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.question-number {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.question-category {
+  background-color: #e9ecef;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: var(--gray-color);
+}
+
+.question-difficulty {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.8rem;
+}
+
+.question-difficulty.easy {
+  background-color: var(--success-color);
+}
+
+.question-difficulty.medium {
+  background-color: var(--warning-color);
+}
+
+.question-difficulty.hard {
+  background-color: var(--danger-color);
+}
+
+.question-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Answer Section */
+.answer-section {
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.answer-box {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 120px;
+  transition: var(--transition);
+}
+
+.answer-box:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+}
+
+.voice-controls {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.voice-btn {
+  background-color: white;
+  border: 1px solid #e9ecef;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.voice-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.voice-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.pulse-ring {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  position: absolute;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Button Row */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.button-row button {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.nav-button {
+  background-color: white;
+  border: 1px solid #e9ecef;
+  color: var(--dark-color);
+}
+
+.nav-button:hover {
+  background-color: #f8f9fa;
+}
+
+.nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary-action {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: white;
+  font-weight: 500;
+}
+
+.primary-action:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.primary-action:disabled {
+  background-color: #e9ecef;
+  border-color: #e9ecef;
+  color: var(--gray-color);
+  cursor: not-allowed;
+}
+
+.primary-action.answered {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+/* Result Box */
+.result-box {
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  border-left: 4px solid var(--primary-color);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.result-box.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.result-box h3 {
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.score-meter {
+  height: 30px;
+  background-color: #e9ecef;
+  border-radius: 15px;
+  margin: 1rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 15px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  transition: width 0.5s ease;
+}
+
+.score-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.evaluation-details {
+  margin-top: 1rem;
+}
+
+.evaluation-details p {
+  margin-bottom: 0.5rem;
+}
+
+.evaluation-details strong {
+  color: var(--primary-dark);
+}
+
+/* Error Message */
+.error-message {
+  background-color: #fff3f3;
+  border-left: 4px solid var(--danger-color);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.error-message button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--gray-color);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 2rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Accessibility */
+[role="img"] {
+  font-size: 1.2em;
+}
+
+/* Add these styles to your existing CSS file */
+.summary-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+.stat-box {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.stat-box h3 {
+  margin-top: 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.stat-box p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0 0;
+  color: #2c3e50;
+}
+
+.question-breakdown {
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.question-breakdown h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.question-breakdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.question-result {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.question-number {
+  font-weight: bold;
+  margin-right: 1rem;
+  color: #2c3e50;
+  min-width: 40px;
+}
+
+.question-text {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.score-badge {
+  background: #4CAF50;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-weight: bold;
+  min-width: 60px;
+  text-align: center;
+}
+
+.score-badge.unanswered {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.summary-actions {
+  margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .summary-stats {
+    flex-direction: column;
+  }
+  
+  .question-result {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .question-text {
+    margin: 0.5rem 0;
+  }
+}
+
+/* Add these to your existing CSS file */
+
+/* Feedback Message */
+.feedback-message {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: var(--border-radius);
+  text-align: center;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease;
+  box-shadow: var(--box-shadow);
+}
+
+.feedback-message.success {
+  background-color: rgba(76, 175, 80, 0.2);
+  border-left: 4px solid var(--success-color);
+  color: var(--success-color);
+}
+
+.feedback-message.error {
+  background-color: rgba(244, 67, 54, 0.2);
+  border-left: 4px solid var(--danger-color);
+  color: var(--danger-color);
+}
+
+/* Smooth transition for question changes */
+.question-box {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Home button styling */
+.home-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.home-button:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+/* Base Styles */
+.evaluator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.interview-screen {
+  display: flex;
+  width: 100%;
+  min-height: 80vh;
+  gap: 20px;
+}
+
+.interviewer-panel {
+  flex: 1;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-panel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Interviewer Video Styles */
+.interviewer-video-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interviewer-video-container.speaking .gesture-animation {
+  animation: pulse 1.5s infinite;
+}
+
+.gesture-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gesture-wrapper.visible {
+  opacity: 1;
+}
+
+.gesture-wrapper:not(.visible) {
+  opacity: 0;
+}
+
+.gesture-animation {
+  width: 100%;
+  height: 400px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+  font-size: 18px;
+}
+
+/* Gesture-specific styles */
+.default-gesture .video-placeholder {
+  background-color: #e0f7fa;
+}
+
+.forward-hands .video-placeholder {
+  background-color: #bbdefb;
+}
+
+.under-chin .video-placeholder {
+  background-color: #d1c4e9;
+}
+
+.nodding-slow .video-placeholder {
+  background-color: #c8e6c9;
+  animation: nod 2s infinite;
+}
+
+.pushing-chair .video-placeholder {
+  background-color: #ffccbc;
+  animation: lean 2s forwards;
+}
+
+.resting-arm .video-placeholder {
+  background-color: #d7ccc8;
+}
+
+.sipping-coffee .video-placeholder {
+  background-color: #d7ccc8;
+  animation: sip 3s infinite;
+}
+
+.thinking .video-placeholder {
+  background-color: #b3e5fc;
+  animation: think 3s infinite;
+}
+
+.typing .video-placeholder {
+  background-color: #cfd8dc;
+  animation: type 1s infinite;
+}
+
+.writing .video-placeholder {
+  background-color: #dcedc8;
+  animation: write 2s infinite;
+}
+
+.listening .video-placeholder {
+  background-color: #b2ebf2;
+  animation: listen 1.5s infinite;
+}
+
+.positive .video-placeholder {
+  background-color: #c8e6c9;
+  animation: thumbsUp 2s forwards;
+}
+
+.negative .video-placeholder {
+  background-color: #ffcdd2;
+  animation: concern 2s forwards;
+}
+
+.gesture-label {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #555;
+  background: rgba(255,255,255,0.8);
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes nod {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes lean {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(20px); }
+}
+
+@keyframes sip {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30% { transform: translateY(-20px) rotate(-10deg); }
+  60% { transform: translateY(-20px) rotate(-10deg); }
+}
+
+@keyframes think {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+@keyframes type {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes write {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+@keyframes listen {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes thumbsUp {
+  0% { transform: rotate(0); }
+  50% { transform: rotate(-20deg); }
+  100% { transform: rotate(0); }
+}
+
+@keyframes concern {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .interview-screen {
+    flex-direction: column;
+  }
+  
+  .interviewer-panel {
+    height: 300px;
+  }
+  
+  .gesture-animation {
+    height: 250px;
+  }
+}
+
+/* Rest of your existing CSS styles... */
+/* Base Styles */
+.evaluator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Header Styles */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 5px;
+  color: #2c3e50;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+/* Interview Screen Layout */
+.interview-screen {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  max-height: calc(100vh - 200px);
+  overflow: hidden;
+}
+
+.interviewer-panel {
+  flex: 0 0 300px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.interviewer-panel.minimized {
+  flex: 0 0 80px;
+}
+
+.user-panel {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Video Player Styles */
+.gesture-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #000;
+}
+
+.interviewer-video-container.minimized .gesture-video {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.gesture-label {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Question Box Styles */
+.question-container {
+  margin-bottom: 20px;
+}
+
+.question-box {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.question-meta {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.question-number {
+  font-weight: bold;
+  color: #3498db;
+}
+
+.question-category {
+  background-color: #e8f4fc;
+  color: #2980b9;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.question-difficulty {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.question-difficulty.easy {
+  background-color: #e8f8ef;
+  color: #27ae60;
+}
+
+.question-difficulty.medium {
+  background-color: #fff3e0;
+  color: #f39c12;
+}
+
+.question-difficulty.hard {
+  background-color: #fdedec;
+  color: #e74c3c;
+}
+
+.question-text {
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* Answer Section Styles */
+.answer-section {
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.answer-box {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 120px;
+  transition: all 0.3s ease;
+}
+
+.compact-answer .answer-box {
+  min-height: 80px;
+}
+
+.voice-controls {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.voice-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s;
+}
+
+.voice-btn:hover {
+  background-color: #2980b9;
+}
+
+.voice-btn.active {
+  background-color: #e74c3c;
+}
+
+.voice-btn:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.pulse-ring {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e74c3c;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Button Row Styles */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.nav-button, .primary-action {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-button {
+  background-color: #ecf0f1;
+  border: 1px solid #bdc3c7;
+  color: #7f8c8d;
+}
+
+.nav-button:hover:not(:disabled) {
+  background-color: #d5dbdb;
+}
+
+.nav-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.primary-action {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+}
+
+.primary-action:hover:not(:disabled) {
+  background-color: #27ae60;
+}
+
+.primary-action.answered {
+  background-color: #3498db;
+}
+
+/* Video Section Styles */
+.interviewer-video-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.interviewer-video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.interviewer-video-container.speaking {
+  box-shadow: 0 0 0 3px #4CAF50;
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.interviewer-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* User Interaction Section */
+.user-interaction-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Rest of your existing CSS... */
+
+/* Base Styles */
+.evaluator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.interview-screen {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.interviewer-video-section {
+  flex: 0 0 40%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-interaction-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-right: 10px;
+}
+
+/* Compact Question Container */
+.question-container-wrapper {
+  flex-shrink: 0;
+  margin: 10px 0;
+}
+
+.question-box {
+  padding: 12px;
+  margin: 0;
+}
+
+.question-meta {
+  margin-bottom: 8px;
+}
+
+.question-text {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Answer Section */
+.answer-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+  margin: 10px 0;
+}
+
+.answer-box {
+  flex: 1;
+  min-height: 80px;
+  resize: none;
+}
+
+/* Evaluation Section */
+.collapsible-section {
+  margin: 8px 0;
+}
+
+.collapsible-content {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin: 8px 0;
+}
+
+/* Button Row */
+.button-row {
+  margin-top: auto;
+  padding-bottom: 10px;
+}
+
+/* Video Container */
+.interviewer-video-container {
+  position: relative;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.interviewer-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Utility Classes */
+.no-scroll {
+  overflow:scroll;
+}
+
+.compact-view .question-box {
+  padding: 8px;
+}
+
+.compact-view .question-text {
+  font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .interview-screen {
+    flex-direction: column;
+  }
+  
+  .interviewer-video-section {
+    flex: 0 0 200px;
+  }
+  
+  .question-text {
+    font-size: 0.9rem;
+  }
+  
+  .answer-box {
+    min-height: 100px;
+  }
+}
+
+/* Keep all your existing styles below this line */
+/* ... (all your existing CSS rules) ... */

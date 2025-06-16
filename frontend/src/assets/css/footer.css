@@ -1,0 +1,64 @@
+.footer {
+    background-color: linear-gradient(135deg, var(--bg-color), #151530);
+    color: #ecf0f1;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 2px solid #ecf0f1; /* Default border */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    margin-top: 10px;
+    display: flex; /* Flexbox to align items horizontally */
+    justify-content: center; /* Centers the links horizontally */
+    gap: 20px; /* Adds spacing between the links */
+    flex-wrap: wrap; /* Ensure items wrap when space is insufficient */
+}
+
+.footer-link {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 14px;
+    padding-bottom: 5px; /* Adds a small space below for underline */
+}
+
+.footer-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Media query for small screens (phones) */
+@media (max-width: 768px) {
+    .footer {
+        border-top: 1px solid #ecf0f1; /* Thinner border for small screens */
+        padding: 15px 0; /* Adjust padding for better spacing */
+    }
+
+    .footer-links {
+        display: block; /* Stack links vertically */
+        margin-top: 15px;
+    }
+
+    .footer-link {
+        margin: 10px 0; /* Adds vertical margin between links */
+        font-size: 14px; /* Keep font size readable */
+        padding-bottom: 0; /* Remove bottom padding for vertical links */
+        text-align: center; /* Center text of the links */
+    }
+}
+
+/* Media query for extra small screens (portrait phones) */
+@media (max-width: 480px) {
+    .footer {
+        border-top: 1px solid #ecf0f1; /* Keep border thin on very small screens */
+        padding: 10px 0; /* Adjust padding for smaller screens */
+    }
+
+    .footer-link {
+        font-size: 12px; /* Slightly smaller text on very small screens */
+        margin-right: 1rem;
+    }
+}

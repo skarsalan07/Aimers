@@ -1,0 +1,50 @@
+/* Prevent text selection on the entire page */
+* {
+  user-select: none !important;
+  -webkit-user-select: none !important; /* For Safari */
+  -moz-user-select: none !important;    /* For Firefox */
+  -ms-user-select: none !important;     /* For IE/Edge */
+}
+
+/* Ensures the carousel images are the same size and responsive */
+.carousel-image {
+  object-fit: cover !important;
+  height: 400px !important;
+  width: 100% !important;
+  filter: brightness(70%) !important; /* Darkens the image to increase text contrast */
+}
+
+/* Keep default Bootstrap caption position */
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  padding: 20px;
+  border-radius: 10px;
+  color: white !important; /* Ensure text is white */
+}
+
+/* Title styling */
+.carousel-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff !important;
+}
+
+/* Description styling */
+.carousel-description {
+  font-size: 1.2rem;
+  color: #f1f1f1 !important;
+}
+
+/* Button styling */
+.carousel-button {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  font-weight: bold;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+}
+
+.carousel-button:hover {
+  background-color: #0056b3;
+}
