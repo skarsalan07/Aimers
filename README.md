@@ -126,7 +126,7 @@ AI & Data Science Student @ BATU
 
 --------------------------------------------------------------
 
-**Yaqob Momen **  
+**Yaqob Momen**  
 AI & Data Science Student @ BATU  
 
 ## 📜 License
