@@ -1,7 +1,6 @@
-
-<!-- Banner or Logo (optional) -->
+  
 <p align="center">
-  <img src="https://your-logo-link.com/logo.png" alt="Aimers Logo" width="120" />
+  <img src="logo.jpg" alt="Aimers Logo" width="500" />
 </p>
 
 <h1 align="center">Aimers 🎯</h1>
@@ -21,14 +20,13 @@
 
 ## 💡 Overview
 
-**Aimers** is an AI-driven platform that simulates technical interviews, analyzes user performance with NLP and ML models, and suggests personalized learning paths to boost placement readiness. Designed for students, freshers, and career switchers — Aimers helps you **practice smarter, not harder.**
+**Aimers** is an AI-driven platform that simulates technical interviews, analyzes user performance with BERT-based NLP models, and suggests personalized learning paths to boost placement readiness. Designed for students, freshers, and career switchers — Aimers helps you **practice smarter, not harder.**
 
 ---
 
 ## ✨ Features
 
-- 🎤 **AI Mock Interviews** – Voice-based Q&A using Bi-LSTM + Attention for natural evaluation.
-- 📄 **Resume Analyzer** – Improve your resume using AI-powered keyword matching and scoring.
+- 🎤 **AI Mock Interviews** – Voice/text-based Q&A using **BERT (`bert-base-nli-mean-tokens`)** for semantic evaluation.
 - 📚 **Smart Roadmap Generator** – AI suggests custom learning paths based on your weak areas.
 - 🤖 **Topic-Wise Interview Questions** – ML, DL, NLP, Web Dev, and DSA coverage.
 - 📊 **Performance Tracking** – Visualize improvement across multiple mock interviews.
@@ -43,10 +41,9 @@
 | **Frontend**  | React.js, JavaScript, HTML5, CSS3, Tailwind CSS / Bootstrap                  |
 | **Backend**   | FastAPI, Python, Uvicorn, Pydantic                                           |
 | **Database**  | MongoDB Atlas (NoSQL), Cassandra (via AstraDB support)                       |
-| **AI/ML**     | Bi-LSTM, Attention, TF-IDF, Cosine Similarity, NLTK, Sentence Transformers   |
+| **AI/ML**     | **BERT (`bert-base-nli-mean-tokens`)**, TF-IDF, Cosine Similarity, NLTK      |
 | **DevOps**    | GitHub Actions (CI), Netlify / GitHub Pages (Frontend), Render (Backend)     |
-
----
+|----------------------------------------------------------------------------------------------|
 
 ## 📁 Folder Structure
 
@@ -90,15 +87,19 @@ cd ../../frontend/basic-ui
 npm install
 npm start
 ```
+
+---
+
 ## 📊 APIs & Models
 
-| Endpoint            | Description                          |
-|---------------------|--------------------------------------|
+| Endpoint            | Description                               |
+|---------------------|-------------------------------------------|
 | `/predict-interview`| NLP model to evaluate spoken/text answers |
-| `/resume-review`    | NLP scoring and keyword matching     |
-| `/roadmap`          | Generates personalized learning paths |
-| `/auth/login`       | User login with JWT                  |
-| `/auth/signup`      | New user registration                |
+| `/resume-review`    | NLP scoring and keyword matching          |
+| `/roadmap`          | Generates personalized learning paths     |
+| `/auth/login`       | User login with JWT                       |
+| `/auth/signup`      | New user registration                     |
+|-----------------------------------------------------------------|
 
 ---
 
@@ -118,12 +119,15 @@ git push origin feature/your-feature
 
 ## 👤 Author
 
-**Arsalan Shaikh**  
+**Arsalan Rafique Shaikh**  
 AI & Data Science Student @ BATU  
-📧 Email: arsalan.ai.dev@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/arsalan-shaikh)
+📧 Email: skarsalan8983@gmail.com
+🔗 [LinkedIn](https://www.linkedin.com/in/arsalanshaikh123)
 
----
+--------------------------------------------------------------
+
+**Yaqob Momen **  
+AI & Data Science Student @ BATU  
 
 ## 📜 License
 
