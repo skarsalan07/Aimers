@@ -522,20 +522,6 @@ function QuestionEvaluator() {
     }
   };
 
-  const navigateQuestion = async (direction) => {
-    const newIndex = direction === 'next' 
-      ? session.currentIndex + 1 
-      : session.currentIndex - 1;
-
-    if (newIndex >= 0 && newIndex <= session.questions.length) {
-      setIsTransitioning(true);
-      playSound(transitionSoundRef);
-      showFeedback(getRandomGreeting('next'), 1500);
-      setAnimationState("transition");
-
-      // Save current answer before navigating
-      const updatedAnswers = [...session.answers];
-      updatedAnswers[session.currentIndex] = answer;
       
       setSession(prev => {
         const updated = { 
@@ -547,9 +533,6 @@ function QuestionEvaluator() {
         return updated;
       });
       
-      // Set the answer for the new question
-      setAnswer(updatedAnswers[newIndex] || "");
-
       await new Promise(resolve => setTimeout(resolve, 500));
       
       if (newIndex === session.questions.length) {
@@ -748,12 +731,7 @@ function QuestionEvaluator() {
                 {currentResult ? '✅' : '📤'}
               </span> {currentResult ? 'Answered' : 'Submit Answer'}
             </button>
-            
-            <button 
-              onClick={() => navigateQuestion('next')} 
-              disabled={animationState === "greeting" || isTransitioning || (session.currentIndex === session.questions.length && session.questions.length >= MAX_QUESTIONS)}
-              className="nav-button"
-            >
+          
               <span role="img" aria-label="next">➡️</span> 
               {session.currentIndex === session.questions.length 
                 ? session.questions.length < MAX_QUESTIONS ? 'New Question' : 'Finish'
@@ -766,4 +744,4 @@ function QuestionEvaluator() {
   );
 }
 
-export default QuestionEvaluator;
+export default QuestionEva1luator;
