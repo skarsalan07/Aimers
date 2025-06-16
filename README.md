@@ -99,7 +99,6 @@ npm start
 | `/roadmap`          | Generates personalized learning paths     |
 | `/auth/login`       | User login with JWT                       |
 | `/auth/signup`      | New user registration                     |
-|-----------------------------------------------------------------|
 
 ---
 
