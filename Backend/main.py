@@ -27,9 +27,9 @@ app.add_middleware(
 )
 
 # MongoDB setup
-client = MongoClient("mongodb://localhost:27017/")
-db = client["aimers_db"]
-users_collection = db["users"]
+# client = MongoClient("mongodb://localhost:27017/")
+# db = client["aimers_db"]
+# users_collection = db["users"]
 
 # JWT setup
 SECRET_KEY = "supersecretkey"
