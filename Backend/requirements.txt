@@ -207,7 +207,6 @@ tensorboard==2.19.0
 tensorboard-data-server==0.7.2
 tensorflow==2.19.0
 tensorflow-hub==0.12.0
-tensorflow-intel==2.16.1
 tensorflowjs==3.18.0
 termcolor==2.4.0
 tf_keras==2.19.0
@@ -244,3 +243,4 @@ xxhash==3.4.1
 yarl==1.9.4
 ydata-profiling==4.8.3
 yfinance==0.2.40
+
