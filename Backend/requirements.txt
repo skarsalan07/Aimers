@@ -131,7 +131,6 @@ optree
 orjson
 packaging
 pandas
-pandas-profiling
 passlib
 patsy
 phik
@@ -228,7 +227,6 @@ tzdata
 ujson
 urllib3
 uvicorn
-visions
 wasabi
 watchdog
 watchfiles
