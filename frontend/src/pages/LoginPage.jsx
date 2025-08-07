@@ -27,7 +27,6 @@ const LoginPage = () => {
 
       setShowGlow(true);
       setTimeout(() => {
-        alert("Login success");
         navigate("/");
       }, 2000);
     } else {

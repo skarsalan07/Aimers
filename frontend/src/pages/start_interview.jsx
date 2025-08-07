@@ -87,8 +87,17 @@ const InterviewerVideo = ({ animationState }) => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play().catch(e => console.log("Video play failed:", e));
+      videoRef.current.src = ANIMATION_MAP[animationState] || forwardHandsVideo;
+      const playPromise = videoRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log("Video play failed:", error);
+          setTimeout(() => {
+            videoRef.current.play().catch(e => console.log("Retry play failed:", e));
+          }, 100);
+        });
+      }
     }
   }, [animationState]);
 
@@ -97,12 +106,11 @@ const InterviewerVideo = ({ animationState }) => {
       <div className="video-wrapper">
         <video 
           ref={videoRef}
-          src={ANIMATION_MAP[animationState] || forwardHandsVideo}
           muted
           loop
           playsInline
           className="interviewer-video"
-          autoPlay
+          preload="auto"
         />
       </div>
       <div className="video-label">Interviewer</div>
@@ -254,7 +262,6 @@ function QuestionEvaluator() {
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [expandedEvaluation, setExpandedEvaluation] = useState(false);
-  const [hasGreeted, setHasGreeted] = useState(false);
   
   const timerRef = useRef(null);
   const recognitionRef = useRef(null);
@@ -282,17 +289,22 @@ function QuestionEvaluator() {
         const transcript = event.results[0][0].transcript;
         setAnswer(prev => prev + (prev ? " " : "") + transcript);
         setAnimationState("listening");
+        setIsListening(false);
       };
 
       recognitionRef.current.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
         setError("Speech recognition error: " + event.error);
         setIsListening(false);
-        setAnimationState("listening");
+        setAnimationState("thinking");
       };
 
       recognitionRef.current.onend = () => {
-        setIsListening(false);
-        setAnimationState(session.currentIndex < session.questions.length ? "thinking" : "greeting");
+        if (isListening) {
+          recognitionRef.current.start();
+        } else {
+          setAnimationState("thinking");
+        }
       };
     } else {
       setSpeechSupported(false);
@@ -388,6 +400,7 @@ function QuestionEvaluator() {
     localStorage.setItem('interviewSession', JSON.stringify(newSession));
     setElapsedTime(0);
     setTimerPaused(false);
+    setAnimationState("greeting");
     
     const welcomeMessage = getRandomGreeting('welcome');
     
@@ -425,7 +438,7 @@ function QuestionEvaluator() {
       setAnswer("");
       
       if (voiceEnabled && speechSupported) {
-        speak(`Question ${session.questions.length + 1}: ${data.question}`);
+        await speak(`Question ${session.questions.length + 1}: ${data.question}`);
       } else {
         setSpeakingText(`Question ${session.questions.length + 1}: ${data.question}`);
         setTimeout(() => setSpeakingText(""), 3000);
@@ -493,7 +506,7 @@ function QuestionEvaluator() {
       }
 
       if (voiceEnabled && speechSupported) {
-        speak(`Evaluation: ${data.evaluation}. Score: ${Math.round(data.similarity * 100)}%`);
+        await speak(`Evaluation: ${data.evaluation}. Score: ${Math.round(data.similarity * 100)}%`);
       } else {
         setSpeakingText(`Evaluation: ${data.evaluation}. Score: ${Math.round(data.similarity * 100)}%`);
         setTimeout(() => setSpeakingText(""), 5000);
@@ -514,11 +527,19 @@ function QuestionEvaluator() {
     
     if (isListening) {
       recognitionRef.current.stop();
+      setIsListening(false);
       setAnimationState("thinking");
     } else {
-      recognitionRef.current.start();
-      setIsListening(true);
-      setAnimationState("listening");
+      try {
+        recognitionRef.current.start();
+        setIsListening(true);
+        setAnimationState("listening");
+      } catch (err) {
+        console.error("Failed to start speech recognition:", err);
+        setError("Failed to start microphone. Please check permissions.");
+        setIsListening(false);
+        setAnimationState("thinking");
+      }
     }
   };
 
@@ -560,7 +581,7 @@ function QuestionEvaluator() {
         }
       } else {
         if (voiceEnabled && speechSupported) {
-          speak(`Question ${newIndex + 1}: ${session.questions[newIndex]}`);
+          await speak(`Question ${newIndex + 1}: ${session.questions[newIndex]}`);
         } else {
           setSpeakingText(`Question ${newIndex + 1}: ${session.questions[newIndex]}`);
           setTimeout(() => setSpeakingText(""), 3000);
@@ -603,12 +624,12 @@ function QuestionEvaluator() {
   return (
     <div className={`evaluator-container ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
       <button className="home-button" onClick={goHome}>
-        🏠
+        🔁
       </button>
 
       <div className="options-bar">
         <div className="options-left">
-           <div className="header">
+          <div className="header">
             <h1>🧠 AI Interview Coach</h1>
             <p className="subtitle">Practice your interview skills with AI-powered feedback</p>
           </div>
@@ -719,7 +740,7 @@ function QuestionEvaluator() {
                 <button 
                   onClick={toggleSpeechRecognition}
                   className={`voice-btn ${isListening ? 'active' : ''}`}
-                  disabled={animationState === "greeting"}
+                  disabled={isTransitioning || isLoading}
                 >
                   <span role="img" aria-label="microphone">
                     {isListening ? '🛑' : '🎤'}
@@ -733,7 +754,7 @@ function QuestionEvaluator() {
           <div className="button-row">
             <button 
               onClick={() => navigateQuestion('prev')} 
-              disabled={session.currentIndex <= 0 || animationState === "greeting" || isTransitioning}
+              disabled={session.currentIndex <= 0 || isTransitioning || isLoading}
               className="nav-button"
             >
               <span role="img" aria-label="previous">⬅️</span> Previous
@@ -741,7 +762,7 @@ function QuestionEvaluator() {
             
             <button 
               onClick={evaluateAnswer} 
-              disabled={!answer.trim() || animationState === "greeting" || currentResult || isTransitioning}
+              disabled={!answer.trim() || currentResult || isTransitioning || isLoading}
               className={`primary-action ${currentResult ? 'answered' : ''}`}
             >
               <span role="img" aria-label="submit">
@@ -751,7 +772,7 @@ function QuestionEvaluator() {
             
             <button 
               onClick={() => navigateQuestion('next')} 
-              disabled={animationState === "greeting" || isTransitioning || (session.currentIndex === session.questions.length && session.questions.length >= MAX_QUESTIONS)}
+              disabled={isTransitioning || isLoading || (session.currentIndex === session.questions.length && session.questions.length >= MAX_QUESTIONS)}
               className="nav-button"
             >
               <span role="img" aria-label="next">➡️</span> 
