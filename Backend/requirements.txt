@@ -140,8 +140,7 @@ platformdirs==4.2.2
 plotly==5.23.0
 plum-dispatch==2.5.7
 preshed==3.0.9
-proto-plus==1.24.0
-protobuf==4.25.5
+
 pyarrow==15.0.2
 pyarrow-hotfix==0.6
 pyasn1==0.4.8
@@ -243,4 +242,5 @@ xxhash==3.4.1
 yarl==1.9.4
 ydata-profiling==4.8.3
 yfinance==0.2.40
+
 
